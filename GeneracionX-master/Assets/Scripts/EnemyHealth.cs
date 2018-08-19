@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 //using UnityEngine.ParticleSystem;
 
@@ -8,9 +9,10 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
-    public int scoreValue = 10;
-    public AudioClip deathClip;
-    public int EnergyToOpenDoor = 100;
+    public int EnergyValue = 10;
+    public AudioClip DeathClip;
+    //public Slider EnergySlider;
+   
 
 
     Animator anim;
@@ -21,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem _smokeParticles;
     ParticleSystem _energyParticles;
 
-
+    static bool doorIsOpen = false;
     private Transform _playersTransform;
     CapsuleCollider capsuleCollider;
     GameObject _door;
@@ -37,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
         fillEnemyParticles(_myParticleSystemArray);
         capsuleCollider = GetComponent <CapsuleCollider> ();
         currentHealth = startingHealth;
+        //EnergySlider.maxValue = EnergyToOpenDoor;
     }
 
 
@@ -129,9 +132,9 @@ public class EnemyHealth : MonoBehaviour
         Rigidbody enemyRigidBody = GetComponent<Rigidbody>();
         enemyRigidBody.isKinematic = true;
         /*Score points*/
-        ScoreManager.score += scoreValue;
- 
-        checkDoor(ScoreManager.score);
+        ScoreManager.energy += EnergyValue;
+
+        checkDoor(ScoreManager.energy);
         /*Fill player energy*/
         fillPlayerEnemy();
         /*Destroy enemy*/
@@ -140,18 +143,23 @@ public class EnemyHealth : MonoBehaviour
 
     private void checkDoor(int score)
     {
-        if(score >= EnergyToOpenDoor)
+        if(score >= ScoreManager.EnergyToOpenDoor && !doorIsOpen)
         {
             Animator doorAnimator;
             BoxCollider doorCollider;
+            AudioSource doorSound;
+
             if (_door != null)
             {
                 doorAnimator = _door.GetComponentInChildren<Animator>();
                 doorCollider = _door.GetComponentInChildren<BoxCollider>();
-                if (doorAnimator != null && doorCollider != null)
+                doorSound = _door.GetComponentInChildren<AudioSource>();
+                if (doorAnimator != null && doorCollider != null && doorSound != null)
                 {
                     doorAnimator.SetTrigger("OpenDoor");
                     doorCollider.isTrigger = true;
+                    doorSound.Play();
+                    doorIsOpen = true;
                 }
                     
             }
@@ -177,7 +185,7 @@ public class EnemyHealth : MonoBehaviour
         anim.SetTrigger("Dead");
 
         /*Play death sound*/
-        enemyAudio.clip = deathClip;
+        enemyAudio.clip = DeathClip;
         enemyAudio.Play();
 
         /*Show fire and smoke*/

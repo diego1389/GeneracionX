@@ -1631,9 +1631,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 150
   currentHealth: 0
-  scoreValue: 15
-  deathClip: {fileID: 8300000, guid: 8b54e243d982dd6489adde5e4413d769, type: 3}
-  EnergyToOpenDoor: 100
+  EnergyValue: 10
+  DeathClip: {fileID: 8300000, guid: 8b54e243d982dd6489adde5e4413d769, type: 3}
 --- !u!114 &114818054279215886
 MonoBehaviour:
   m_ObjectHideFlags: 1

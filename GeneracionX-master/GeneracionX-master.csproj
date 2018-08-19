@@ -321,6 +321,7 @@
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\EnergyScoreManager.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />

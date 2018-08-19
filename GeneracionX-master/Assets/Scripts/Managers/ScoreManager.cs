@@ -1,21 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int score;
-    Text text;
+    public static int energy;
+    public Slider EnergySlider;
+    public static int EnergyToOpenDoor = 100;
+    //Text text;
 
     void Awake ()
     {
-        text = GetComponent <Text> ();
-        score = 0;
+        //text = GetComponent <Text> ();
+        //EnergySlider.maxValue = EnergyToOpenDoor;
+        //energy = 0;
     }
 
 
     void Update ()
     {
-        text.text = "Score: " + score;
+        EnergySlider.value = energy;
+        //text.text = "Score: " + score;
     }
+
+    //public static void UpdateEnergy(int energyValue)
+    //{
+    //    EnergySlider.value += energyValue;
+    //}
 }
