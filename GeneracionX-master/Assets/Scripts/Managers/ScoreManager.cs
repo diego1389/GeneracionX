@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     {
         //text = GetComponent <Text> ();
         //EnergySlider.maxValue = EnergyToOpenDoor;
-        //energy = 0;
+        energy = 0;
     }
 
 

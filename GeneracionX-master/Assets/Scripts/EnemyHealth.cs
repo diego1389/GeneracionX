@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem _smokeParticles;
     ParticleSystem _energyParticles;
 
-    static bool doorIsOpen = false;
+    static bool doorIsOpen;
     private Transform _playersTransform;
     CapsuleCollider capsuleCollider;
     GameObject _door;
@@ -39,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
         fillEnemyParticles(_myParticleSystemArray);
         capsuleCollider = GetComponent <CapsuleCollider> ();
         currentHealth = startingHealth;
+        doorIsOpen = false;
         //EnergySlider.maxValue = EnergyToOpenDoor;
     }
 
