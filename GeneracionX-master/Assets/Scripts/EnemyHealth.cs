@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
 
 
     Animator anim;
+    ChangeSceneManager doorManager;
     AudioSource enemyAudio;
     ParticleSystem[] _myParticleSystemArray;
     ParticleSystem _hitParticles;
@@ -23,23 +24,23 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem _smokeParticles;
     ParticleSystem _energyParticles;
 
-    static bool doorIsOpen;
+    //static bool doorIsOpen;
     private Transform _playersTransform;
     CapsuleCollider capsuleCollider;
-    GameObject _door;
+  
     bool isDead;
 
     void Awake ()
     {
         anim = GetComponent <Animator> ();
-        _door = GameObject.FindGameObjectWithTag("Door");
+        doorManager = FindObjectOfType<ChangeSceneManager>();
         _playersTransform = GameObject.FindGameObjectWithTag("Player").transform;
         enemyAudio = GetComponent <AudioSource> ();
         _myParticleSystemArray = GetComponentsInChildren <ParticleSystem> ();
         fillEnemyParticles(_myParticleSystemArray);
         capsuleCollider = GetComponent <CapsuleCollider> ();
         currentHealth = startingHealth;
-        doorIsOpen = false;
+        //doorIsOpen = false;
         //EnergySlider.maxValue = EnergyToOpenDoor;
     }
 
@@ -134,39 +135,15 @@ public class EnemyHealth : MonoBehaviour
         enemyRigidBody.isKinematic = true;
         /*Score points*/
         ScoreManager.energy += EnergyValue;
-
-        checkDoor(ScoreManager.energy);
+        doorManager.checkDoor(ScoreManager.energy);
+        //checkDoor(ScoreManager.energy);
         /*Fill player energy*/
         fillPlayerEnemy();
         /*Destroy enemy*/
         Destroy(gameObject, 10f);
     }
 
-    private void checkDoor(int score)
-    {
-        if(score >= ScoreManager.EnergyToOpenDoor && !doorIsOpen)
-        {
-            Animator doorAnimator;
-            BoxCollider doorCollider;
-            AudioSource doorSound;
 
-            if (_door != null)
-            {
-                doorAnimator = _door.GetComponentInChildren<Animator>();
-                doorCollider = _door.GetComponentInChildren<BoxCollider>();
-                doorSound = _door.GetComponentInChildren<AudioSource>();
-                if (doorAnimator != null && doorCollider != null && doorSound != null)
-                {
-                    doorAnimator.SetTrigger("OpenDoor");
-                    doorCollider.isTrigger = true;
-                    doorSound.Play();
-                    doorIsOpen = true;
-                }
-                    
-            }
-        }
-
-    }
 
     void fillPlayerEnemy()
     {
