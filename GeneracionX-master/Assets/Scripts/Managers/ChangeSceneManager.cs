@@ -7,6 +7,7 @@ public class ChangeSceneManager : MonoBehaviour {
 
     GameObject _door;
     static bool doorIsOpen;
+
     // Use this for initialization
     void Start () {
         _door = GameObject.FindGameObjectWithTag("Door");
