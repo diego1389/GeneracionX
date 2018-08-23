@@ -7,6 +7,9 @@ public class BeeMovement : MonoBehaviour {
 
     Rigidbody beeBody;
     public float upForce;
+    float maxPositionY = 20f;
+    float minPositionY = 0f;
+    float rangePositionY = 2f;
     //public float beeSpeed = 5f;
 
     private void Awake()
@@ -22,6 +25,17 @@ public class BeeMovement : MonoBehaviour {
     private void movementUpDown()
     {
         beeBody.AddRelativeForce(Vector3.up * upForce);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (transform.position.y >= (maxPositionY - rangePositionY))
+        {
+            upForce = 6f;
+        } else if (transform.position.y <= minPositionY + rangePositionY)
+        {
+            upForce = 10f;
+        }
     }
     //// Use this for initialization
     //void Start () {
