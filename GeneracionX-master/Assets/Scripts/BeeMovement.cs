@@ -6,10 +6,19 @@ using UnityEngine;
 public class BeeMovement : MonoBehaviour {
 
     Rigidbody beeBody;
-    public float upForce;
+    public float upForce = 10f;
+    public float movementForwardSpeed = 0f;
     float maxPositionY = 20f;
     float minPositionY = 0f;
-    float rangePositionY = 2f;
+    float maxPositionZ = -18f;
+    float minPositionZ = 10f;
+
+    float rangePosition = 2f;
+    bool isUp = false;
+    bool isDown = false;
+    bool isFront = false;
+    bool isBack = false;
+
     //public float beeSpeed = 5f;
 
     private void Awake()
@@ -20,6 +29,12 @@ public class BeeMovement : MonoBehaviour {
     private void FixedUpdate()
     {
         movementUpDown();
+        movementForwardBackward();
+    }
+
+    private void movementForwardBackward()
+    {
+        beeBody.AddRelativeForce(Vector3.forward * movementForwardSpeed);
     }
 
     private void movementUpDown()
@@ -29,13 +44,36 @@ public class BeeMovement : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (transform.position.y >= (maxPositionY - rangePositionY))
+        beeMovement();
+    }
+
+    private void beeMovement()
+    {
+        updateBeePositionStates();
+        if (isUp && isBack)
+        {
+            movementForwardSpeed = 0f;
+            upForce = 6f;
+        }
+        else if (isDown && isBack)
         {
             upForce = 6f;
-        } else if (transform.position.y <= minPositionY + rangePositionY)
+            movementForwardSpeed = 10f;
+            //upForce = 10f;
+        }
+        else if (isDown && isFront)
         {
+            movementForwardSpeed = 0f;
             upForce = 10f;
         }
+    }
+
+    private void updateBeePositionStates()
+    {
+        isUp = transform.position.y >= (maxPositionY - rangePosition);
+        isDown = transform.position.y <= (minPositionY + rangePosition);
+        isFront = transform.position.z <= (maxPositionZ + rangePosition);
+        isBack = transform.position.z >= (minPositionZ - rangePosition); 
     }
     //// Use this for initialization
     //void Start () {
