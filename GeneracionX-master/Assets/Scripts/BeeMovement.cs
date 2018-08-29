@@ -58,13 +58,18 @@ public class BeeMovement : MonoBehaviour {
         else if (isDown && isBack)
         {
             upForce = 6f;
-            movementForwardSpeed = 10f;
+            movementForwardSpeed = 18f;
             //upForce = 10f;
         }
         else if (isDown && isFront)
         {
             movementForwardSpeed = 0f;
             upForce = 10f;
+        }
+        else if (isUp && isFront)
+        {
+            movementForwardSpeed = -18f;
+            //upForce = 6f;
         }
     }
 
