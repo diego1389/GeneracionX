@@ -13,8 +13,6 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip DeathClip;
     //public Slider EnergySlider;
    
-
-
     Animator anim;
     ChangeSceneManager doorManager;
     AudioSource enemyAudio;
@@ -28,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
     private Transform _playersTransform;
     CapsuleCollider capsuleCollider;
   
-    bool isDead;
+    bool isDead = false;
 
     void Awake ()
     {
@@ -67,7 +65,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_energyParticles.isPlaying && _playersTransform != null)
+        if (_energyParticles != null &&_energyParticles.isPlaying && _playersTransform != null)
         {
             // Extract copy
             //private ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[10];
@@ -105,8 +103,11 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth -= amount;
 
-        _hitParticles.transform.position = hitPoint;
-        _hitParticles.Play();
+        if(_hitParticles!= null)
+        {
+            _hitParticles.transform.position = hitPoint;
+            _hitParticles.Play();
+        }
 
         if (currentHealth <= 0)
         {
@@ -128,8 +129,12 @@ public class EnemyHealth : MonoBehaviour
         /*Display death effects*/
         displayDeathEffects();
         /*Stop moving*/
+
         NavMeshAgent navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        navMeshAgent.isStopped = true;
+        if (navMeshAgent != null)
+        {
+            navMeshAgent.isStopped = true;
+        }
         //navMeshAgent.enabled = false;
         Rigidbody enemyRigidBody = GetComponent<Rigidbody>();
         enemyRigidBody.isKinematic = true;
