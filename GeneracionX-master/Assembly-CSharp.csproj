@@ -82,6 +82,7 @@
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\BehaviorScript.cs" />
     <Compile Include="Assets\EnergyScoreManager.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Assets\Scripts\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Managers\ButtonBehaviour.cs" />
     <Compile Include="Assets\Scripts\Managers\ChangeSceneManager.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameOverManager.cs" />
