@@ -8,9 +8,10 @@ public class BeeMovement : MonoBehaviour {
     Rigidbody beeBody;
     GameObject player;
     EnemyHealth enemyHealth;
+    public float Speed = 3f; 
 
-    public float upForce = 10f;
-    public float movementForwardSpeed = 0f;
+    //public float upForce = 10f;
+    //public float movementForwardSpeed = 0f;
 
     //float maxPositionY = 20f;
     //float minPositionY = 0f;
@@ -38,7 +39,7 @@ public class BeeMovement : MonoBehaviour {
         if(enemyHealth.currentHealth > 0)
         {
             beeBody.transform.position = Vector3.Lerp(beeBody.transform.position, player.transform.position,
-          (Time.deltaTime * 3) / Vector3.Distance(player.transform.position, beeBody.transform.position));
+          (Time.deltaTime * Speed) / Vector3.Distance(player.transform.position, beeBody.transform.position));
         }
      
         //movementForwardBackward();
